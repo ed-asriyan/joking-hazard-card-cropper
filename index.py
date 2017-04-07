@@ -3,9 +3,10 @@ from sys import argv
 
 
 class CardCropper:
-    _INIT_POINTS = [
-        (586, 492)
-    ]
+    _INIT_POINT = (585, 492)
+
+    _LEFT_OFFSET = 1350
+    _TOP_OFFSET = 1905
 
     _CARD_SIZE = (1244, 1804)
 
@@ -20,7 +21,12 @@ class CardCropper:
 
     def get_cards(self, mode='border'):
         result = []
-        for init_point in CardCropper._INIT_POINTS:
+        for i in range(9):
+            init_point = (
+                CardCropper._INIT_POINT[0] + CardCropper._LEFT_OFFSET * (i % 3),
+                CardCropper._INIT_POINT[1] + CardCropper._TOP_OFFSET * (i // 3),
+            )
+
             if mode == 'border':
                 init = (
                     init_point[0],
