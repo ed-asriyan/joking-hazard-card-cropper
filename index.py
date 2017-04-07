@@ -10,7 +10,7 @@ class CardCropper:
 
     _CARD_SIZE = (1244, 1804)
 
-    _BORDER_WIDTH = 10
+    _BORDER_WIDTH = 29
     _BORDER_RADIUS = 10
 
     def __init__(self, image):
@@ -60,7 +60,7 @@ class CardCropper:
 def main():
     path = argv[1]
 
-    for index, result in enumerate(CardCropper(path).get_cards()):
+    for index, result in enumerate(CardCropper(path).get_cards('inner')):
         result.save(str(index) + '.jpg')
 
 
