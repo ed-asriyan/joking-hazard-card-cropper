@@ -67,8 +67,15 @@ def save_path(file_path, index):
 
 
 def main():
+    mode = 'border'
     for source in argv[1:]:
-        for crop_index, crop in enumerate(CardCropper(source).get_cards('pure')):
+        if source[:5] == 'mode=':
+            mode = source[5:]
+            argv.remove(source)
+            break
+
+    for source in argv[1:]:
+        for crop_index, crop in enumerate(CardCropper(source).get_cards(mode)):
             result_path = save_path(source, crop_index)
             print('Processing ' + result_path + '... ', end='')
             stdout.flush()
