@@ -1,5 +1,5 @@
 from PIL import Image
-from sys import argv
+from sys import argv, stdout
 from os import path
 
 
@@ -69,7 +69,11 @@ def save_path(file_path, index):
 def main():
     for source in argv[1:]:
         for crop_index, crop in enumerate(CardCropper(source).get_cards('pure')):
-            crop.save(save_path(source, crop_index))
+            result_path = save_path(source, crop_index)
+            print('Processing ' + result_path + '... ', end='')
+            stdout.flush()
+            crop.save(result_path)
+            print('Done.')
 
 
 if __name__ == '__main__':
