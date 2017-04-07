@@ -1,5 +1,6 @@
 from PIL import Image
 from sys import argv
+from os import path
 
 
 class CardCropper:
@@ -57,11 +58,18 @@ class CardCropper:
         return result
 
 
-def main():
-    path = argv[1]
+def save_path(file_path, index):
+    # directory = path.dirname(path)
+    name, extension = path.splitext(file_path)
+    name = path.basename(name)
 
-    for index, result in enumerate(CardCropper(path).get_cards('pure')):
-        result.save(str(index) + '.jpg')
+    return name + '_' + str(index) + extension
+
+
+def main():
+    for source in argv[1:]:
+        for crop_index, crop in enumerate(CardCropper(source).get_cards('pure')):
+            crop.save(save_path(source, crop_index))
 
 
 if __name__ == '__main__':
